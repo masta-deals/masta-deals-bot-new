@@ -1,0 +1,58 @@
+name: Masta Deals Bot
+
+on:
+  schedule:
+    - cron: "14 5-20 * * *"
+  workflow_dispatch:
+    inputs:
+      nur_test:
+        description: "Nur testen (es wird nichts gesendet)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: masta-deals-bot
+  cancel-in-progress: false
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TZ: Europe/Berlin
+      CREATORS_ID: ${{ secrets.CREATORS_ID }}
+      CREATORS_SECRET: ${{ secrets.CREATORS_SECRET }}
+      CREATORS_VERSION: ${{ secrets.CREATORS_VERSION }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Pakete installieren
+        run: pip install -r requirements.txt
+      - name: Bot ausführen
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then ARGS="--jetzt"; fi
+          if [ "${{ inputs.nur_test }}" = "true" ]; then ARGS="--dry-run"; fi
+          python bot.py $ARGS
+      - name: Merkzettel und Protokoll speichern
+        if: always()
+        run: |
+          git config user.name "masta-deals-bot"
+          git config user.email "masta-deals-bot@users.noreply.github.com"
+          [ -f gepostet.json ] && git add gepostet.json
+          [ -f bot.log ] && git add bot.log
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu speichern."
+          else
+            git commit -m "Bot-Stand aktualisiert"
+            git pull --rebase || true
+            git push
+          fi
