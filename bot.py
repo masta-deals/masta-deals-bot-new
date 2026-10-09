@@ -51,7 +51,7 @@ KEYWORDS = [
     # Spielzeug, Baby & Haustier
     "LEGO", "Brettspiel", "Hundefutter", "Katzenspielzeug",
     # Lebensmittel & Drogerie
-    "Kaffee Bohnen", "Proteinriegel", "Tee",
+    "Kaffee Bohnen", "babykleideung", "Tee",
     # Technik (bewusst nur ein paar)
     "Kopfhörer", "Alkohol", "LED Lampe",
 ]
