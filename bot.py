@@ -37,7 +37,7 @@ PARTNER_TAG = os.environ.get("PARTNER_TAG") or "mikesaffili0f-21"
 # oder ergänzen. Der Bot mischt sie bei jedem Lauf neu durch.
 KEYWORDS = [
     # Haushalt & Küche
-    "Pfanne", "Küchenmesser", "Bettwäsche", "Staubsauger", "Kaffeemaschine",
+    "Pfanne", "Küchenmesser", "Bettwäsche", "Whiskey", "Kaffeemaschine",
     "Vorratsdosen", "Handtücher",
     # Mode & Schuhe
     "Sneaker Herren", "Jogginghose", "Winterjacke", "Rucksack", "Sonnenbrille",
@@ -53,7 +53,7 @@ KEYWORDS = [
     # Lebensmittel & Drogerie
     "Kaffee Bohnen", "Proteinriegel", "Tee",
     # Technik (bewusst nur ein paar)
-    "Kopfhörer", "Powerbank", "LED Lampe",
+    "Kopfhörer", "Alkohol", "LED Lampe",
 ]
 MIN_DISCOUNT = 30          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
