@@ -37,29 +37,37 @@ PARTNER_TAG = os.environ.get("PARTNER_TAG") or "mikesaffili0f-21"
 # oder ergänzen. Der Bot mischt sie bei jedem Lauf neu durch.
 KEYWORDS = [
     # Haushalt & Küche
-    "Pfanne", "Küchenmesser", "Bettwäsche", "Whiskey", "Kaffeemaschine",
-    "Vorratsdosen", "Handtücher",
-    # Mode & Schuhe
-    "Sneaker Herren", "Jogginghose", "Winterjacke", "Rucksack", "Sonnenbrille",
-    "Armbanduhr",
-    # Beauty & Pflege
-    "Parfum", "Rasierer", "Haarpflege", "Zahnbürste elektrisch",
+    "Pfanne", "Küchenmesser", "Bettwäsche", "Staubsauger", "Kaffeemaschine",
+    "Vorratsdosen", "Handtücher", "Topfset", "Backform", "Brotbox",
+    "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen",
+    "Decke Kuschel", "Duschvorhang", "Mülleimer", "Aufbewahrungsbox",
+    # Mode
+    "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
+    "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke",
+    "Gürtel", "Sonnenbrille", "Armbanduhr",
+    # Beauty & Gesundheit
+    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste",
+    "Haartrockner", "Make-up", "Nagelpflege", "Duschgel", "Vitamine",
     # Sport & Freizeit
-    "Fitness Zubehör", "Camping", "Fahrrad Zubehör", "Yogamatte",
+    "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Campingstuhl",
+    "Schlafsack", "Wanderschuhe", "Fitnessband", "Laufschuhe",
     # Auto & Werkzeug
-    "Autozubehör", "Akkuschrauber", "Werkzeug Set",
-    # Spielzeug, Baby & Haustier
-    "LEGO", "Brettspiel", "Hundefutter", "Katzenspielzeug",
-    # Lebensmittel & Drogerie
-    "Kaffee Bohnen", "babykleideung", "Tee",
-    # Technik (bewusst nur ein paar)
-    "Kopfhörer", "Alkohol", "LED Lampe",
+    "Autozubehör", "Werkzeugset", "Akkuschrauber", "Taschenlampe", "Gartenschlauch",
+    "Leiter", "Bohrer Set",
+    # Spielzeug, Kinder & Haustier
+    "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter",
+    "Katzenspielzeug", "Kinderbuch", "Playmobil", "Hundebett", "Babyzubehör",
+    # Lebensmittel & Getränke
+    "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
+    "Olivenöl", "Gewürze", "Süßigkeiten",
+    # Technik (wenig)
+    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe",
 ]
-MIN_DISCOUNT = 30          # nur Angebote mit mindestens so viel Prozent Rabatt
+MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
 MAX_POSTS_PER_RUN = 30     # Ziel: so viele Posts pro Durchlauf (= pro Stunde)
-MAX_SEARCHES_PER_RUN = 70  # Sicherung: so viele Amazon-Suchen höchstens pro Durchlauf
-MAX_PAGES_PER_KEYWORD = 5  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
+MAX_SEARCHES_PER_RUN = 100  # Sicherung: so viele Amazon-Suchen höchstens pro Durchlauf
+MAX_PAGES_PER_KEYWORD = 8  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
 PAGE_COOLDOWN_HOURS = 6    # Seiten ohne neue Deals werden so lange übersprungen
 REPOST_AFTER_DAYS = 7      # gleiches Produkt frühestens nach so vielen Tagen
 PAUSE_BETWEEN_SEARCHES = 0.5   # Sekunden (die Bibliothek bremst zusätzlich auf 1 Anfrage/Sek.)
