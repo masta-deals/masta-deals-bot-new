@@ -40,7 +40,7 @@ KEYWORDS = [
     "Pfanne", "Küchenmesser", "Bettwäsche", "Staubsauger", "Kaffeemaschine",
     "Vorratsdosen", "Handtücher", "Topfset", "Backform", "Brotbox",
     "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen",
-    "Decke Kuschel", "Duschvorhang", "Mülleimer", "Aufbewahrungsbox",
+    "Decke Kuschel", "Alkohol", "Mülleimer", "Aufbewahrungsbox",
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke",
@@ -56,7 +56,7 @@ KEYWORDS = [
     "Leiter", "Bohrer Set",
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter",
-    "Katzenspielzeug", "Kinderbuch", "Playmobil", "Hundebett", "Babyzubehör",
+    "Katzenspielzeug", "Kinderbuch", "Playmobil", "whiskey", "Babyzubehör",
     # Lebensmittel & Getränke
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten",
@@ -67,7 +67,7 @@ MIN_DISCOUNT = 15          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
 MAX_POSTS_PER_RUN = 30     # Ziel: so viele Posts pro Durchlauf (= pro Stunde)
 MAX_SEARCHES_PER_RUN = 75  # Sicherung: so viele Amazon-Suchen höchstens pro Durchlauf
-MAX_PAGES_PER_KEYWORD = 8  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
+MAX_PAGES_PER_KEYWORD = 5  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
 PAGE_COOLDOWN_HOURS = 6    # Seiten ohne neue Deals werden so lange übersprungen
 REPOST_AFTER_DAYS = 7      # gleiches Produkt frühestens nach so vielen Tagen
 PAUSE_BETWEEN_SEARCHES = 0.5   # Sekunden (die Bibliothek bremst zusätzlich auf 1 Anfrage/Sek.)
