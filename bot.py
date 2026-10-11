@@ -69,7 +69,7 @@ KEYWORDS = [
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
-MAX_POSTS_PER_RUN = 20     # Ziel: so viele Posts pro Durchlauf (= pro Stunde)
+MAX_POSTS_PER_RUN = 15     # Ziel: so viele Posts pro Durchlauf (= pro Stunde)
 MAX_SEARCHES_PER_RUN = 100  # Sicherung: so viele Amazon-Suchen höchstens pro Durchlauf
 MAX_PAGES_PER_KEYWORD = 8  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
 PAGE_COOLDOWN_HOURS = 6    # Seiten ohne neue Deals werden so lange übersprungen
