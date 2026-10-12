@@ -43,7 +43,7 @@ KEYWORDS = [
     "Decke Kuschel", "Alkohol", "Mülleimer", "Aufbewahrungsbox",
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
-    "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke",
+    "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
     "Gürtel", "Sonnenbrille", "Armbanduhr",
     # Beauty & Gesundheit
     "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste",
