@@ -56,7 +56,7 @@ KEYWORDS = [
     "Leiter", "Bohrer Set",
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter",
-    "Katzenspielzeug", "Kinderbuch", "Playmobil", "whiskey", "Babyzubehör",
+    "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör",
     # Lebensmittel & Getränke
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten",
@@ -66,6 +66,8 @@ KEYWORDS = [
     "Halloween", "Fasching",
     # Angebote
     "Halloween", "Wein", "Kostüme", "Makita", "Werkzeug", 
+    # Alkohol
+    "Gin", "Wein", "Whisky",  
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
