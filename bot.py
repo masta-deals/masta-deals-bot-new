@@ -52,7 +52,7 @@ KEYWORDS = [
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Campingstuhl",
     "Schlafsack", "Wanderschuhe", "Fitnessband", "Laufschuhe",
     # Auto & Werkzeug
-    "Autozubehör", "Werkzeugset", "Akkuschrauber", "Taschenlampe", "Gartenschlauch",
+    "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
     "Leiter", "Bohrer Set",
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter",
