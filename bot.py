@@ -40,7 +40,7 @@ KEYWORDS = [
     "Pfanne", "Küchenmesser", "Bettwäsche", "Staubsauger", "Kaffeemaschine",
     "Vorratsdosen", "Handtücher", "Topfset", "Backform", "Brotbox",
     "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen",
-    "Decke Kuschel", "Alkohol", "Mülleimer", "Aufbewahrungsbox",
+    "Decke Kuschel", "Müllsäcke", "Mülleimer", "Aufbewahrungsbox", "waschpulver", 
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
@@ -177,12 +177,14 @@ def format_post(deal: dict) -> str:
     if len(title) > 90:
         title = title[:87].rstrip() + "..."
     lines = [f"🧨 <b>{html.escape(title)}</b>", ""]
-    lines.append(f"✅ Jetzt nur <b>{euro(deal['price'])}</b>  (-{deal['percent']} %)")
     if deal["old_price"]:
-        lines.append(f"❌ Statt <s>{euro(deal['old_price'])}</s>")
+        lines.append(
+            f"✅ Nur <b>{euro(deal['price'])}</b> statt {euro(deal['old_price'])}  (-{deal['percent']} %)"
+        )
+    else:
+        lines.append(f"✅ Nur <b>{euro(deal['price'])}</b>  (-{deal['percent']} %)")
     lines += ["", f"👉 {deal['link']}", "", FOOTER]
     return "\n".join(lines)
-
 
 # ----------------------------------------------------------------------
 # Doppelpost-Schutz
