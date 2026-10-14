@@ -49,8 +49,8 @@ KEYWORDS = [
     "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste",
     "Haartrockner", "Make-up", "Nagelpflege", "Duschgel", "Vitamine",
     # Sport & Freizeit
-    "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Campingstuhl",
-    "Schlafsack", "Wanderschuhe", "Fitnessband", "Laufschuhe",
+    "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings",
+    "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
     "Leiter", "Bohrer Set",
