@@ -49,7 +49,7 @@ KEYWORDS = [
     "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo"
     "Haartrockner", "Make-up", "Nagelpflege", "Duschgel", "Vitamine",
     # Sport & Freizeit
-    "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings",
+    "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
