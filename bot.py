@@ -46,7 +46,7 @@ KEYWORDS = [
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
     "Gürtel", "Sonnenbrille", "Armbanduhr",
     # Beauty & Gesundheit
-    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste",
+    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo"
     "Haartrockner", "Make-up", "Nagelpflege", "Duschgel", "Vitamine",
     # Sport & Freizeit
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings",
