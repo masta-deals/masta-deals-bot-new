@@ -173,17 +173,11 @@ def parse_deal(item) -> dict | None:
 
 
 def format_post(deal: dict) -> str:
-    title = deal["title"]
-    if len(title) > 90:
-        title = title[:87].rstrip() + "..."
-    lines = [f"🧨 <b>{html.escape(title)}</b>", ""]
     if deal["old_price"]:
-        lines.append(
-            f"✅ Nur <b>{euro(deal['price'])}</b> statt {euro(deal['old_price'])}  (-{deal['percent']} %)"
-        )
+        preis = f"🧨 Nur <b>{euro(deal['price'])}</b> statt {euro(deal['old_price'])}  (-{deal['percent']} %)"
     else:
-        lines.append(f"✅ Nur <b>{euro(deal['price'])}</b>  (-{deal['percent']} %)")
-    lines += ["", f"👉 {deal['link']}", "", FOOTER]
+        preis = f"🧨 Nur <b>{euro(deal['price'])}</b>  (-{deal['percent']} %)"
+    lines = [preis, "", f"👉 {deal['link']}", "", FOOTER]
     return "\n".join(lines)
 
 # ----------------------------------------------------------------------
