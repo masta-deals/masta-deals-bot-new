@@ -65,7 +65,7 @@ KEYWORDS = [
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
-    "Halloween", "Wein", "Kostüme", "Makita", "Werkzeug", "Fiskars", 
+    "Halloween", "Wein", "Kostüme", "Makita", "Werkzeug", "Fiskars", "samsung", 
     # Alkohol
     "Gin", "Wein", "Whisky",  
 ]
