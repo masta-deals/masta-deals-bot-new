@@ -67,7 +67,9 @@ KEYWORDS = [
     # Angebote
     "Halloween", "Wein", "Kostüme", "Makita", "Werkzeug", "Fiskars", "samsung", 
     # Alkohol
-    "Gin", "Wein", "Whisky",  
+    "Gin", "Wein", "Whisky",
+    # Weihnachten
+    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
