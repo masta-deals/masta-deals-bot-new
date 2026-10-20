@@ -56,7 +56,7 @@ KEYWORDS = [
     "Leiter", "Bohrer Set",
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
-    "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör",
+    "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör", "Gesellschaftsspiele", 
     # Lebensmittel & Getränke
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
