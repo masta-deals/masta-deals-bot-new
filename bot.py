@@ -55,11 +55,11 @@ KEYWORDS = [
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
     "Leiter", "Bohrer Set",
     # Spielzeug, Kinder & Haustier
-    "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter",
+    "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
     "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör",
     # Lebensmittel & Getränke
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
-    "Olivenöl", "Gewürze", "Süßigkeiten",
+    "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
     # Technik (wenig)
     "Powerbank", "Bluetooth Lautsprecher", "LED Lampe",
     # Kostüme
