@@ -47,8 +47,7 @@ KEYWORDS = [
     "Gürtel", "Sonnenbrille", "Armbanduhr",
     # Beauty & Gesundheit
     "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo"
-    "Haartrockner", "Make-up", "Nagelpflege", "Duschgel", "Vitamine",
-    # Sport & Freizeit
+    "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
