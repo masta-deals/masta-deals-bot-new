@@ -68,7 +68,9 @@ KEYWORDS = [
     # Alkohol
     "Gin", "Wein", "Whisky",
     # Weihnachten
-    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", 
+    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta",
+    # Hobby
+    "Angeln", "Fischen", "Angelrouten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
