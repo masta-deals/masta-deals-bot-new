@@ -8,6 +8,7 @@ Start:      python bot.py
 Nur testen: python bot.py --dry-run   (druckt die Posts, sendet nichts)
 """
 import html
+import io
 import json
 import os
 import random
@@ -25,6 +26,11 @@ try:
 except ImportError:
     pass
 
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:  # ohne Pillow gibt es einfach den klassischen Post
+    Image = None
+
 from amazon_creatorsapi import AmazonCreatorsApi, Country
 from amazon_creatorsapi.models import SearchItemsResource
 
@@ -32,6 +38,11 @@ from amazon_creatorsapi.models import SearchItemsResource
 # Einstellungen (hier anpassen)
 # ----------------------------------------------------------------------
 PARTNER_TAG = os.environ.get("PARTNER_TAG") or "mikesaffili0f-21"
+
+# Aussehen der Posts (nur dieses eine Wort ändern, um zwischen den Stilen zu wechseln):
+#   "karte"      = flaches Bild (Foto links, Preis rechts), darunter nur der Link
+#   "klassisch"  = Produktfoto, darunter der Text mit Preis (der alte Stand)
+POST_STYLE = "karte"
 
 # Suchbegriffe, gemischt aus vielen Bereichen. Du kannst sie frei ändern, löschen
 # oder ergänzen. Der Bot mischt sie bei jedem Lauf neu durch.
@@ -46,7 +57,7 @@ KEYWORDS = [
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
     "Gürtel", "Sonnenbrille", "Armbanduhr",
     # Beauty & Gesundheit
-    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo"
+    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
     "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
@@ -183,6 +194,122 @@ def format_post(deal: dict) -> str:
     lines = [preis, "", f"👉 {deal['link']}", "", FOOTER]
     return "\n".join(lines)
 
+
+# ----------------------------------------------------------------------
+# Karte (flaches Bild: Foto links, Preis rechts)
+# ----------------------------------------------------------------------
+CARD_W, CARD_H = 1000, 340
+
+
+def format_caption(deal: dict) -> str:
+    """Text unter der Karte: nur Link und Smiley-Zeile."""
+    return "\n".join([f"👉 {deal['link']}", "", FOOTER])
+
+
+def _font(size: int, bold: bool = False):
+    names = (
+        ["DejaVuSans-Bold.ttf", "LiberationSans-Bold.ttf", "NotoSans-Bold.ttf", "arialbd.ttf"]
+        if bold
+        else ["DejaVuSans.ttf", "LiberationSans-Regular.ttf", "NotoSans-Regular.ttf", "arial.ttf"]
+    )
+    for name in names:
+        try:
+            return ImageFont.truetype(name, size)
+        except OSError:
+            continue
+    return ImageFont.load_default(size)
+
+
+def _fit(text: str, font, max_w: float) -> str:
+    """Kürzt einen Text mit ... so, dass er in die Breite passt."""
+    if font.getlength(text) <= max_w:
+        return text
+    while text and font.getlength(text + "…") > max_w:
+        text = text[:-1]
+    return text.rstrip() + "…"
+
+
+def _wrap(text: str, font, max_w: float, max_lines: int) -> list[str]:
+    lines: list[str] = []
+    cur = ""
+    for word in text.split():
+        test = f"{cur} {word}".strip()
+        if font.getlength(test) <= max_w:
+            cur = test
+        else:
+            if cur:
+                lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = _fit(lines[-1] + "…", font, max_w)
+    return [_fit(line, font, max_w) for line in lines]
+
+
+def make_card(deal: dict) -> bytes | None:
+    """Baut die Karte als JPEG. Gibt None zurück, wenn etwas nicht klappt (dann gibt es den klassischen Post)."""
+    if Image is None or not deal.get("image"):
+        return None
+    try:
+        resp = requests.get(deal["image"], timeout=20)
+        resp.raise_for_status()
+        photo = Image.open(io.BytesIO(resp.content)).convert("RGBA")
+
+        card = Image.new("RGB", (CARD_W, CARD_H), "white")
+        box = CARD_H - 40
+        photo.thumbnail((box, box))
+        flat = Image.new("RGBA", photo.size, "white")
+        flat.alpha_composite(photo)
+        card.paste(flat.convert("RGB"), (20 + (box - photo.width) // 2, 20 + (box - photo.height) // 2))
+
+        d = ImageDraw.Draw(card)
+        x = CARD_H + 10
+        right = CARD_W - 30
+
+        # Titel (höchstens 2 Zeilen)
+        f_title = _font(30)
+        y = 26
+        for line in _wrap(deal["title"], f_title, right - x, 2):
+            d.text((x, y), line, font=f_title, fill="#222222")
+            y += 40
+
+        # Rabatt-Schild rechts
+        badge_text = f"-{deal['percent']} %"
+        f_badge = _font(46, True)
+        bw = int(f_badge.getlength(badge_text)) + 44
+        bx0, by0, by1 = right - bw, 140, 226
+        d.rounded_rectangle((bx0, by0, right, by1), radius=16, fill="#e53935")
+        d.text((bx0 + bw / 2, (by0 + by1) / 2), badge_text, font=f_badge, fill="white", anchor="mm")
+
+        # Preis (wird kleiner, wenn er nicht passt)
+        price_text = euro(deal["price"])
+        size = 80
+        f_price = _font(size, True)
+        while f_price.getlength(price_text) > bx0 - x - 20 and size > 40:
+            size -= 4
+            f_price = _font(size, True)
+        d.text((x, (by0 + by1) / 2), price_text, font=f_price, fill="#1a8f3c", anchor="lm")
+
+        # alter Preis, durchgestrichen
+        if deal["old_price"]:
+            old_text = f"statt {euro(deal['old_price'])}"
+            f_old = _font(32)
+            oy = 252
+            d.text((x, oy), old_text, font=f_old, fill="#777777")
+            mid = oy + 22
+            d.line((x, mid, x + f_old.getlength(old_text), mid), fill="#777777", width=2)
+
+        d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#dddddd", width=2)
+        out = io.BytesIO()
+        card.save(out, "JPEG", quality=90)
+        return out.getvalue()
+    except Exception as exc:  # die Karte darf nie den Lauf stoppen
+        print(f"[Hinweis] Karte für {deal.get('asin')} nicht möglich: {scrub(str(exc))}")
+        return None
+
+
 # ----------------------------------------------------------------------
 # Doppelpost-Schutz
 # ----------------------------------------------------------------------
@@ -213,8 +340,8 @@ def already_posted(state: dict, deal: dict) -> bool:
 # ----------------------------------------------------------------------
 # Telegram
 # ----------------------------------------------------------------------
-def _telegram_post(url: str, data: dict) -> requests.Response:
-    r = requests.post(url, data=data, timeout=30)
+def _telegram_post(url: str, data: dict, files: dict | None = None) -> requests.Response:
+    r = requests.post(url, data=data, files=files, timeout=60)
     if r.status_code == 429:  # Telegram bremst: kurz warten und einmal wiederholen
         wait = 5
         try:
@@ -222,7 +349,7 @@ def _telegram_post(url: str, data: dict) -> requests.Response:
         except (ValueError, TypeError, AttributeError):
             pass
         time.sleep(min(wait, 60) + 1)
-        r = requests.post(url, data=data, timeout=30)
+        r = requests.post(url, data=data, files=files, timeout=60)
     return r
 
 
@@ -230,6 +357,18 @@ def send_telegram(deal: dict, text: str) -> None:
     token = os.environ["TELEGRAM_TOKEN"]
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
     base = f"https://api.telegram.org/bot{token}"
+    if POST_STYLE == "karte":
+        card = make_card(deal)
+        if card:
+            r = _telegram_post(
+                f"{base}/sendPhoto",
+                {"chat_id": chat_id, "caption": format_caption(deal), "parse_mode": "HTML"},
+                files={"photo": ("deal.jpg", card, "image/jpeg")},
+            )
+            if r.ok:
+                return
+            print(f"[Hinweis] Karte für {deal['asin']} abgelehnt, sende klassischen Post.")
+    # klassischer Post (auch Rückfall, falls die Karte nicht klappt)
     if deal["image"] and len(text) <= 1024:
         r = _telegram_post(
             f"{base}/sendPhoto",
@@ -378,7 +517,11 @@ def main() -> None:
         text = format_post(deal)
         if dry_run:
             print("-" * 40)
-            print(text)
+            if POST_STYLE == "karte":
+                print(f"[Karte] {deal['title'][:60]} | {euro(deal['price'])} (-{deal['percent']} %)")
+                print(format_caption(deal))
+            else:
+                print(text)
             continue
         try:
             send_telegram(deal, text)
