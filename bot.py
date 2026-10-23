@@ -59,8 +59,8 @@ KEYWORDS = [
     # Lebensmittel & Getränke
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
-    # Technik (wenig)
-    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe",
+    # Technik 
+    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", 
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
@@ -79,7 +79,7 @@ MAX_SEARCHES_PER_RUN = 100  # Sicherung: so viele Amazon-Suchen höchstens pro D
 MAX_PAGES_PER_KEYWORD = 8  # so viele Ergebnisseiten (je 10 Treffer) pro Suchbegriff
 PAGE_COOLDOWN_HOURS = 6    # Seiten ohne neue Deals werden so lange übersprungen
 REPOST_AFTER_DAYS = 7      # gleiches Produkt frühestens nach so vielen Tagen
-PAUSE_BETWEEN_SEARCHES = 0.5   # Sekunden (die Bibliothek bremst zusätzlich auf 1 Anfrage/Sek.)
+PAUSE_BETWEEN_SEARCHES = 3   # Sekunden (die Bibliothek bremst zusätzlich auf 1 Anfrage/Sek.)
 
 # Uhrzeiten: Der Bot sendet nur in diesem Zeitfenster (volle Stunden, 24-Stunden-Format).
 # Beispiel: 8 und 22 bedeutet von 08:00 bis 21:59 Uhr. Außerhalb passiert nichts.
