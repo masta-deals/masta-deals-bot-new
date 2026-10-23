@@ -50,7 +50,7 @@ KEYWORDS = [
     # Haushalt & Küche
     "Pfanne", "Küchenmesser", "Bettwäsche", "Staubsauger", "Kaffeemaschine",
     "Vorratsdosen", "Handtücher", "Topfset", "Backform", "Brotbox",
-    "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen",
+    "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen", "Möbel", "couch", "Regal",
     "Decke Kuschel", "Müllsäcke", "Mülleimer", "Aufbewahrungsbox", "waschpulver", "dr.oetker", 
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
