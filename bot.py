@@ -136,11 +136,8 @@ def get_resources():
 
 
 def link_for(item) -> str:
-    url = getattr(item, "detail_page_url", None) or f"https://www.amazon.de/dp/{item.asin}"
-    if "tag=" not in url:
-        sep = "&" if "?" in url else "?"
-        url = f"{url}{sep}tag={PARTNER_TAG}"
-    return url
+    """Kurzer Partner-Link: nur Produktnummer (ASIN) und deine Tracking-ID."""
+    return f"https://www.amazon.de/dp/{item.asin}?tag={PARTNER_TAG}"
 
 
 def parse_deal(item) -> dict | None:
