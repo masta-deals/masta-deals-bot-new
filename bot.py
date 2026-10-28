@@ -57,13 +57,13 @@ KEYWORDS = [
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
     "Gürtel", "Sonnenbrille", "Armbanduhr",
     # Beauty & Gesundheit
-    "Parfüm", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
+    "Parfum", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
     "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
-    "Leiter", "Bohrer Set",
+    "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", 
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
     "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör", "Gesellschaftsspiele", 
