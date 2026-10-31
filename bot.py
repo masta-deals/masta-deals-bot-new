@@ -71,17 +71,17 @@ KEYWORDS = [
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
     # Technik 
-    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", 
+    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", 
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
-    "Halloween", "Wein", "Kostüme", "Makita", "Werkzeug", "Fiskars", "samsung", 
+    "Halloween", "Kostüme", "Makita", "Werkzeug", "Fiskars", "samsung", 
     # Alkohol
     "Gin", "Wein", "Whisky",
     # Weihnachten
     "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta",
     # Hobby
-    "Angeln", "Fischen", "Angelrouten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
+    "Angeln", "Fischen", "Angelruten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
