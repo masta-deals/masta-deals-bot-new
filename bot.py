@@ -63,7 +63,7 @@ KEYWORDS = [
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
-    "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", 
+    "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", "Tesla", "Teslazubehör", 
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
     "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör", "Gesellschaftsspiele", 
