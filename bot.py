@@ -63,7 +63,7 @@ KEYWORDS = [
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
     "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
-    "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", "Tesla", "Teslazubehör", 
+    "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", "Tesla", "Teslazubehör", "Festool", "Makita", "Metabo", 
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
     "Katzenspielzeug", "Kinderbuch", "Playmobil", "barbie", "Babyzubehör", "Gesellschaftsspiele", 
@@ -71,7 +71,7 @@ KEYWORDS = [
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
     # Technik 
-    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", 
+    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", "Handwärmer", 
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
