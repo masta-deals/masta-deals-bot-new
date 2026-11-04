@@ -54,8 +54,8 @@ KEYWORDS = [
     "Decke Kuschel", "Müllsäcke", "Mülleimer", "Aufbewahrungsbox", "waschpulver", "dr.oetker", 
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
-    "Unterwäsche", "Rucksack", "Handtasche", "Mütze Schal", "Sportjacke", "Tanga", "Slip", 
-    "Gürtel", "Sonnenbrille", "Armbanduhr",
+    "Unterwäsche", "Rucksack", "Handtasche", "Mütze", "Schal", "Sportjacke", "Tanga", "Slip", "Strapsen", 
+    "Gürtel", "Sonnenbrille", "Jugendkleidung", "baggyjeans", 
     # Beauty & Gesundheit
     "Parfum", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
     "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
