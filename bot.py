@@ -84,6 +84,8 @@ KEYWORDS = [
     "Angeln", "Fischen", "Angelruten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
     # Prime
     "Serien", 
+    # Möbel
+    "Furnier", "Holzbrett", "Schneidebrett", "Bastelholz", "Basteln", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
