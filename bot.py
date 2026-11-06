@@ -102,6 +102,11 @@ PAUSE_BETWEEN_SEARCHES = 3   # Sekunden (die Bibliothek bremst zusätzlich auf 1
 ACTIVE_FROM_HOUR = 7
 ACTIVE_UNTIL_HOUR = 22
 
+# Doppelter Auslöser: GitHub startet den Bot zweimal pro Stunde. Läuft der erste Start,
+# überspringt der zweite sich selbst. Fällt einer aus, springt der andere ein.
+# So lange nach einem Lauf wird ein automatischer Start übersprungen (Minuten):
+MIN_MINUTES_BETWEEN_RUNS = 40
+
 STATE_FILE = Path(__file__).with_name("gepostet.json")
 LOG_FILE = Path(__file__).with_name("bot.log")
 
@@ -496,6 +501,18 @@ def main() -> None:
     if "--jetzt" not in sys.argv and not dry_run and not in_active_hours():
         print(f"Außerhalb des Zeitfensters ({ACTIVE_FROM_HOUR}:00 bis {ACTIVE_UNTIL_HOUR}:00 Uhr). Nichts gesendet.")
         return
+    state = load_state()
+    if "--jetzt" not in sys.argv and not dry_run:
+        last = state.get("_letzter_lauf")
+        if last:
+            try:
+                age = datetime.now() - datetime.fromisoformat(last)
+            except ValueError:
+                age = None
+            if age is not None and age < timedelta(minutes=MIN_MINUTES_BETWEEN_RUNS):
+                minutes = int(age.total_seconds() // 60)
+                print(f"Letzter Lauf war vor {minutes} Minuten (Pause: {MIN_MINUTES_BETWEEN_RUNS}). Übersprungen.")
+                return
     api = AmazonCreatorsApi(
         credential_id=os.environ["CREATORS_ID"],
         credential_secret=os.environ["CREATORS_SECRET"],
@@ -504,7 +521,6 @@ def main() -> None:
         country=Country.DE,
         throttling=1,
     )
-    state = load_state()
     deals, stats = collect_deals(api, state)
     if not dry_run:
         save_state(state)  # merkt sich auch, welche Seiten leer waren
@@ -540,6 +556,9 @@ def main() -> None:
             f"Suchen: {stats['searches']} | Fehler: {stats['errors']}"
             + (" | ABGEBROCHEN" if stats["aborted"] else "")
         )
+        if not stats["aborted"]:
+            state["_letzter_lauf"] = datetime.now().isoformat()
+            save_state(state)
     print(f"Fertig. {sent if not dry_run else 0} Posts gesendet.")
 
 
