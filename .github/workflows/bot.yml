@@ -9,6 +9,10 @@ on:
         description: "Nur testen (es wird nichts gesendet)"
         type: boolean
         default: false
+      automatisch:
+        description: "Vom Zeitplan-Dienst gestartet (Zeitfenster und Pause gelten)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -40,6 +44,7 @@ jobs:
         run: |
           ARGS=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then ARGS="--jetzt"; fi
+          if [ "${{ inputs.automatisch }}" = "true" ]; then ARGS=""; fi
           if [ "${{ inputs.nur_test }}" = "true" ]; then ARGS="--dry-run"; fi
           python bot.py $ARGS
       - name: Merkzettel und Protokoll speichern
