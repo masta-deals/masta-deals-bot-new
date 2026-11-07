@@ -105,7 +105,7 @@ ACTIVE_UNTIL_HOUR = 22
 # Doppelter Auslöser: GitHub startet den Bot zweimal pro Stunde. Läuft der erste Start,
 # überspringt der zweite sich selbst. Fällt einer aus, springt der andere ein.
 # So lange nach einem Lauf wird ein automatischer Start übersprungen (Minuten):
-MIN_MINUTES_BETWEEN_RUNS = 40
+MIN_MINUTES_BETWEEN_RUNS = 50
 
 STATE_FILE = Path(__file__).with_name("gepostet.json")
 LOG_FILE = Path(__file__).with_name("bot.log")
