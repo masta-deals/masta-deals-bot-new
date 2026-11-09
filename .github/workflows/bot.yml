@@ -10,7 +10,11 @@ on:
         type: boolean
         default: false
       automatisch:
-        description: "Vom Zeitplan-Dienst gestartet (Zeitfenster und Pause gelten)"
+        description: "Wird nicht mehr gebraucht (bleibt nur, damit der Zeitplan-Dienst weiter funktioniert)"
+        type: boolean
+        default: false
+      jetzt:
+        description: "Sofort posten (ignoriert Zeitfenster und Pause)"
         type: boolean
         default: false
 
@@ -43,8 +47,7 @@ jobs:
       - name: Bot ausführen
         run: |
           ARGS=""
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then ARGS="--jetzt"; fi
-          if [ "${{ inputs.automatisch }}" = "true" ]; then ARGS=""; fi
+          if [ "${{ inputs.jetzt }}" = "true" ]; then ARGS="--jetzt"; fi
           if [ "${{ inputs.nur_test }}" = "true" ]; then ARGS="--dry-run"; fi
           python bot.py $ARGS
       - name: Merkzettel und Protokoll speichern
