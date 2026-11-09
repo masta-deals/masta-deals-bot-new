@@ -52,12 +52,59 @@ jobs:
         run: |
           git config user.name "masta-deals-bot"
           git config user.email "masta-deals-bot@users.noreply.github.com"
-          [ -f gepostet.json ] && git add gepostet.json
-          [ -f bot.log ] && git add bot.log
-          if git diff --cached --quiet; then
-            echo "Keine Änderungen zu speichern."
-          else
+          mkdir -p "$RUNNER_TEMP/mein"
+          cp gepostet.json bot.log "$RUNNER_TEMP/mein/" 2>/dev/null || true
+          for versuch in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            python - "$RUNNER_TEMP/mein" <<'EOF'
+          import json, sys
+          from pathlib import Path
+
+          eigen = Path(sys.argv[1])
+
+          def laden(pfad):
+              try:
+                  return json.loads(Path(pfad).read_text(encoding="utf-8"))
+              except Exception:
+                  return {}
+
+          fremd = laden("gepostet.json")
+          meins = laden(eigen / "gepostet.json")
+          for key, wert in meins.items():
+              if key == "_seiten":
+                  fremd.setdefault("_seiten", {})
+                  for seite, zeit in wert.items():
+                      if zeit > fremd["_seiten"].get(seite, ""):
+                          fremd["_seiten"][seite] = zeit
+              elif key == "_letzter_lauf":
+                  if wert > fremd.get(key, ""):
+                      fremd[key] = wert
+              else:
+                  alt = fremd.get(key)
+                  if not isinstance(alt, dict) or wert.get("time", "") >= alt.get("time", ""):
+                      fremd[key] = wert
+          if meins or fremd:
+              Path("gepostet.json").write_text(json.dumps(fremd, indent=2, ensure_ascii=False), encoding="utf-8")
+
+          log_fremd = Path("bot.log").read_text(encoding="utf-8").splitlines() if Path("bot.log").exists() else []
+          log_mein = (eigen / "bot.log").read_text(encoding="utf-8").splitlines() if (eigen / "bot.log").exists() else []
+          neu = [z for z in log_mein if z not in log_fremd]
+          if neu:
+              Path("bot.log").write_text("\n".join(log_fremd + neu) + "\n", encoding="utf-8")
+          EOF
+            [ -f gepostet.json ] && git add gepostet.json
+            [ -f bot.log ] && git add bot.log
+            if git diff --cached --quiet; then
+              echo "Keine Änderungen zu speichern."
+              exit 0
+            fi
             git commit -m "Bot-Stand aktualisiert"
-            git pull --rebase || true
-            git push
-          fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push abgelehnt (Versuch $versuch von 5), neuer Anlauf ..."
+            sleep $((versuch * 3))
+          done
+          echo "Speichern ist nach 5 Versuchen fehlgeschlagen."
+          exit 1
