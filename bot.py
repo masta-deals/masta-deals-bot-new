@@ -62,7 +62,7 @@ KEYWORDS = [
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
     # Auto & Werkzeug
-    "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch",
+    "Autozubehör", "Reifen", "Felgen", "Werkzeugset", "Akkuschrauber", "Gartenschlauch", "Enteiser", 
     "Leiter", "Bohrer Set", "Winterreifen", "Allwetterreifen", "Tesla", "Teslazubehör", "Festool", "Makita", "Metabo", 
     # Spielzeug, Kinder & Haustier
     "Lego", "Puzzle", "Brettspiel", "Kuscheltier", "Hundefutter", "Pelikan", "Buntstifte", "Malkasten", 
@@ -79,7 +79,7 @@ KEYWORDS = [
     # Alkohol
     "Gin", "Wein", "Whisky",
     # Weihnachten
-    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", "Geschenke", "Weihnachtsspielzeug", 
+    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", "Geschenke", "Weihnachtsspielzeug", "weihnachten", 
     # Hobby
     "Angeln", "Fischen", "Angelruten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
     # Prime
