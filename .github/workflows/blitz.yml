@@ -1,0 +1,107 @@
+name: Masta Deals Blitz
+
+on:
+  schedule:
+    - cron: "37 5-20/2 * * *"
+  workflow_dispatch:
+    inputs:
+      nur_test:
+        description: "Nur testen (es wird nichts gesendet)"
+        type: boolean
+        default: false
+      automatisch:
+        description: "Vom Zeitplan-Dienst gestartet (Zeitfenster und Pause gelten)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: masta-deals-blitz
+  cancel-in-progress: false
+
+jobs:
+  blitz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TZ: Europe/Berlin
+      CREATORS_ID: ${{ secrets.CREATORS_ID }}
+      CREATORS_SECRET: ${{ secrets.CREATORS_SECRET }}
+      CREATORS_VERSION: ${{ secrets.CREATORS_VERSION }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Pakete installieren
+        run: pip install -r requirements.txt
+      - name: Blitz-Bot ausführen
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then ARGS="--jetzt"; fi
+          if [ "${{ inputs.automatisch }}" = "true" ]; then ARGS=""; fi
+          if [ "${{ inputs.nur_test }}" = "true" ]; then ARGS="--dry-run"; fi
+          python blitz.py $ARGS
+      - name: Merkzettel und Protokoll speichern
+        if: always()
+        run: |
+          git config user.name "masta-deals-bot"
+          git config user.email "masta-deals-bot@users.noreply.github.com"
+          mkdir -p "$RUNNER_TEMP/mein"
+          cp gepostet_blitz.json bot.log "$RUNNER_TEMP/mein/" 2>/dev/null || true
+          for versuch in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            python - "$RUNNER_TEMP/mein" <<'EOF'
+          import json, sys
+          from pathlib import Path
+
+          eigen = Path(sys.argv[1])
+
+          def laden(pfad):
+              try:
+                  return json.loads(Path(pfad).read_text(encoding="utf-8"))
+              except Exception:
+                  return {}
+
+          fremd = laden("gepostet_blitz.json")
+          meins = laden(eigen / "gepostet_blitz.json")
+          for key, wert in meins.items():
+              if key == "_letzter_lauf":
+                  if wert > fremd.get(key, ""):
+                      fremd[key] = wert
+              else:
+                  alt = fremd.get(key)
+                  if not isinstance(alt, dict) or wert.get("time", "") >= alt.get("time", ""):
+                      fremd[key] = wert
+          if meins or fremd:
+              Path("gepostet_blitz.json").write_text(json.dumps(fremd, indent=2, ensure_ascii=False), encoding="utf-8")
+
+          log_fremd = Path("bot.log").read_text(encoding="utf-8").splitlines() if Path("bot.log").exists() else []
+          log_mein = (eigen / "bot.log").read_text(encoding="utf-8").splitlines() if (eigen / "bot.log").exists() else []
+          neu = [z for z in log_mein if z not in log_fremd]
+          if neu:
+              Path("bot.log").write_text("\n".join(log_fremd + neu) + "\n", encoding="utf-8")
+          EOF
+            [ -f gepostet_blitz.json ] && git add gepostet_blitz.json
+            [ -f bot.log ] && git add bot.log
+            if git diff --cached --quiet; then
+              echo "Keine Änderungen zu speichern."
+              exit 0
+            fi
+            git commit -m "Blitz-Stand aktualisiert"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push abgelehnt (Versuch $versuch von 5), neuer Anlauf ..."
+            sleep $((versuch * 3))
+          done
+          echo "Speichern ist nach 5 Versuchen fehlgeschlagen."
+          exit 1
