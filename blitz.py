@@ -30,8 +30,9 @@ BLITZ_MAX_POSTS = 10           # höchstens so viele Posts pro Lauf
 BLITZ_MAX_SEARCHES = 120       # Sicherung: Amazon-Suchen pro Lauf
 BLITZ_MAX_PAGES = 3            # Ergebnisseiten pro Suchbegriff
 BLITZ_MIN_MINUTES_LEFT = 20    # Angebote, die gleich enden, werden nicht mehr gepostet
+BLITZ_MAX_HOURS_LEFT = 24      # nur Angebote, die in höchstens so vielen Stunden enden (dort läuft auf Amazon der Countdown)
 BLITZ_MIN_MINUTES_BETWEEN_RUNS = 90
-EXTRA_KEYWORDS = ["Blitzangebot", "Angebot des Tages", "Black Friday", "Cyber Monday", "Cyber Week"]
+EXTRA_KEYWORDS = ["Blitzangebot", "Angebot des Tages"]
 
 BLITZ_STATE_FILE = Path(__file__).with_name("gepostet_blitz.json")
 TZ = ZoneInfo("Europe/Berlin")
@@ -97,6 +98,8 @@ def parse_blitz(item) -> dict | None:
         now = datetime.now(TZ)
         if end is None or end < now + timedelta(minutes=BLITZ_MIN_MINUTES_LEFT):
             return None
+        if end > now + timedelta(hours=BLITZ_MAX_HOURS_LEFT):
+            return None  # läuft noch lange, kein Countdown
         start = parse_end(getattr(details, "start_time", None))
         if start is not None and start > now:
             return None  # Angebot hat noch nicht begonnen
@@ -154,13 +157,19 @@ def make_blitz_card(deal: dict) -> bytes | None:
 
 def make_blitz_caption(deal: dict) -> str:
     kopf = f"⚡ Blitzangebot – endet {end_label(deal['end'])}"
+    infos = []
+    stunden = (deal["end"] - datetime.now(TZ)).total_seconds() / 3600
+    if stunden >= 1:
+        infos.append(f"noch ca. {int(round(stunden))} Std.")
     if deal.get("claimed"):
         try:
-            kopf += f" ({int(float(deal['claimed']))} % verkauft)"
+            infos.append(f"{int(float(deal['claimed']))} % verkauft")
         except (TypeError, ValueError):
             pass
     if deal.get("prime_only"):
-        kopf += " (nur Prime)"
+        infos.append("nur Prime")
+    if infos:
+        kopf += " (" + ", ".join(infos) + ")"
     return "\n".join([kopf, "", f"👉 {deal['link']}", "", bot.FOOTER])
 
 
