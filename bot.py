@@ -71,7 +71,7 @@ KEYWORDS = [
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
     # Technik 
-    "Powerbank", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", "Handwärmer", "vape", "elfbar", "e-zigarette", 
+    "Powerbank", "GTA6", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", "Handwärmer", "vape", "elfbar", "e-zigarette", 
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
@@ -85,7 +85,7 @@ KEYWORDS = [
     # Prime
     "Serien", 
     # Möbel
-    "Furnier", "Holzbrett", "Schneidebrett", "Bastelholz", "Basteln", 
+    "Furnier", "Holzbrett", "Schneidebrett", "Bastelholz", "Basteln", "Games", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
