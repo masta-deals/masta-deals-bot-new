@@ -44,6 +44,10 @@ PARTNER_TAG = os.environ.get("PARTNER_TAG") or "mikesaffili0f-21"
 #   "klassisch"  = Produktfoto, darunter der Text mit Preis (der alte Stand)
 POST_STYLE = "karte"
 
+# Black Friday Weeks: orange Umrandung um die Karte.
+# Aus- und anschalten: True = mit orangem Rahmen, False = normaler grauer Rand
+BLACK_FRIDAY_RAND = True
+
 # Suchbegriffe, gemischt aus vielen Bereichen. Du kannst sie frei ändern, löschen
 # oder ergänzen. Der Bot mischt sie bei jedem Lauf neu durch.
 KEYWORDS = [
@@ -307,7 +311,10 @@ def make_card(deal: dict) -> bytes | None:
             mid = oy + 22
             d.line((x, mid, x + f_old.getlength(old_text), mid), fill="#777777", width=2)
 
-        d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#dddddd", width=2)
+        if BLACK_FRIDAY_RAND:
+            d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#ff7a00", width=14)
+        else:
+            d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#dddddd", width=2)
         out = io.BytesIO()
         card.save(out, "JPEG", quality=90)
         return out.getvalue()
