@@ -48,6 +48,15 @@ POST_STYLE = "karte"
 # Aus- und anschalten: True = mit orangem Rahmen, False = normaler grauer Rand
 BLACK_FRIDAY_RAND = True
 
+# Kleines Schild "Black Friday Angebote" oben links auf der Karte (nach der Aktion auf False).
+BLACK_FRIDAY_SCHILD = True
+BLACK_FRIDAY_TEXT = "Black Friday Angebote"
+
+# Logo als Wasserzeichen in der Mitte der Karte (Datei logo.png liegt neben bot.py).
+LOGO_AKTIV = True
+LOGO_GROESSE = 220      # Durchmesser in Pixeln (die Karte ist 340 Pixel hoch)
+LOGO_DECKKRAFT = 0.25   # 0 = unsichtbar, 1 = voll sichtbar
+
 # Suchbegriffe, gemischt aus vielen Bereichen. Du kannst sie frei ändern, löschen
 # oder ergänzen. Der Bot mischt sie bei jedem Lauf neu durch.
 KEYWORDS = [
@@ -258,6 +267,26 @@ def _wrap(text: str, font, max_w: float, max_lines: int) -> list[str]:
     return [_fit(line, font, max_w) for line in lines]
 
 
+_LOGO_CACHE: dict = {}
+
+
+def _logo():
+    """Lädt logo.png einmal und macht es durchsichtig. Gibt None zurück, wenn es fehlt."""
+    if "logo" not in _LOGO_CACHE:
+        logo = None
+        try:
+            if LOGO_AKTIV and Image is not None:
+                src = Image.open(Path(__file__).with_name("logo.png")).convert("RGBA")
+                src = src.resize((LOGO_GROESSE, LOGO_GROESSE), Image.LANCZOS)
+                alpha = src.getchannel("A").point(lambda a: int(a * LOGO_DECKKRAFT))
+                src.putalpha(alpha)
+                logo = src
+        except Exception as exc:  # fehlendes Logo darf nie den Lauf stoppen
+            print(f"[Hinweis] Logo nicht geladen: {scrub(str(exc))}")
+        _LOGO_CACHE["logo"] = logo
+    return _LOGO_CACHE["logo"]
+
+
 def make_card(deal: dict) -> bytes | None:
     """Baut die Karte als JPEG. Gibt None zurück, wenn etwas nicht klappt (dann gibt es den klassischen Post)."""
     if Image is None or not deal.get("image"):
@@ -274,7 +303,17 @@ def make_card(deal: dict) -> bytes | None:
         flat.alpha_composite(photo)
         card.paste(flat.convert("RGB"), (20 + (box - photo.width) // 2, 20 + (box - photo.height) // 2))
 
+        logo = _logo()
+        if logo is not None:  # Wasserzeichen unter dem Text, Preis und Titel bleiben gut lesbar
+            card.paste(logo.convert("RGB"), ((CARD_W - logo.width) // 2, (CARD_H - logo.height) // 2), logo.getchannel("A"))
+
         d = ImageDraw.Draw(card)
+
+        if BLACK_FRIDAY_SCHILD:
+            f_bf = _font(19, True)
+            bw = int(f_bf.getlength(BLACK_FRIDAY_TEXT)) + 26
+            d.rounded_rectangle((26, 26, 26 + bw, 26 + 34), radius=10, fill="#0b3d2e")
+            d.text((26 + bw / 2, 26 + 17), BLACK_FRIDAY_TEXT, font=f_bf, fill="white", anchor="mm")
         x = CARD_H + 10
         right = CARD_W - 30
 
