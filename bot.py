@@ -75,7 +75,7 @@ KEYWORDS = [
     "Kaffee Bohnen", "Tee", "Schokolade", "Nüsse", "Proteinriegel",
     "Olivenöl", "Gewürze", "Süßigkeiten", "chips", 
     # Technik 
-    "Powerbank", "GTA6", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", "Handwärmer", "vape", "elfbar", "e-zigarette", 
+    "Powerbank", "Playstation", "GTA6", "Bluetooth Lautsprecher", "LED Lampe", "Playstation", "TV", "Gadgets", "Home", "kitchengadgets", "Handwärmer", "vape", "elfbar", "e-zigarette", 
     # Kostüme
     "Halloween", "Fasching",
     # Angebote
