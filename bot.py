@@ -68,7 +68,7 @@ KEYWORDS = [
     # Mode
     "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze", "Schal", "Sportjacke", "Tanga", "Slip", "Strapsen", 
-    "Gürtel", "Sonnenbrille", "Jugendkleidung", "baggyjeans", 
+    "Gürtel", "Sonnenbrille", "Jugendkleidung", "baggyjeans", "Winterklamotten",
     # Beauty & Gesundheit
     "Parfum", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
     "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
@@ -98,7 +98,7 @@ KEYWORDS = [
     # Prime
     "Serien", 
     # Möbel
-    "Furnier", "Holzbrett", "Schneidebrett", "Bastelholz", "Basteln", "Games", 
+    "Furnier", "Holzbrett", "Schneidebrett", "Bastelholz", "Basteln", "Games", "GTA6", "Playstation", 
 ]
 MIN_DISCOUNT = 25          # nur Angebote mit mindestens so viel Prozent Rabatt
 MIN_PRICE = 5.0            # Euro, darunter wird ignoriert
