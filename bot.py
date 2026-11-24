@@ -45,7 +45,7 @@ PARTNER_TAG = os.environ.get("PARTNER_TAG") or "mikesaffili0f-21"
 POST_STYLE = "karte"
 
 # Black Friday Weeks: orange Umrandung um die Karte.
-# Aus- und anschalten: True = mit orangem Rahmen, False = normaler grauer Rand
+# Aus- und anschalten: True = mit grünem Rahmen, False = normaler grauer Rand
 BLACK_FRIDAY_RAND = True
 
 # Kleines Schild "Black Friday Angebote" oben links auf der Karte (nach der Aktion auf False).
@@ -92,7 +92,7 @@ KEYWORDS = [
     # Alkohol
     "Gin", "Wein", "Whisky",
     # Weihnachten
-    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", "Geschenke", "Weihnachtsspielzeug", "weihnachten", 
+    "Angebote", "Tannenbaum", "Kugeln", "Adventskalender", "Lametta", "Geschenke", "Weihnachtsspielzeug", "weihnachten", "Kinderspielzeug", 
     # Hobby
     "Angeln", "Fischen", "Angelruten", "Köder", "Darts", "Billiard", "Bogenschießen", "Reiten", "Schwimmen", "Rally", 
     # Prime
