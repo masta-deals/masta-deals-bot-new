@@ -47,6 +47,7 @@ POST_STYLE = "karte"
 # Black Friday Weeks: orange Umrandung um die Karte.
 # Aus- und anschalten: True = mit grünem Rahmen, False = normaler grauer Rand
 BLACK_FRIDAY_RAND = True
+RAND_FARBE = "#0b3d2e"   # Farbe des Rahmens (dasselbe Dunkelgrün wie das Schild); vorher Orange: "#ff7a00"
 
 # Kleines Schild "Black Friday Angebote" oben links auf der Karte (nach der Aktion auf False).
 BLACK_FRIDAY_SCHILD = True
@@ -351,7 +352,7 @@ def make_card(deal: dict) -> bytes | None:
             d.line((x, mid, x + f_old.getlength(old_text), mid), fill="#777777", width=2)
 
         if BLACK_FRIDAY_RAND:
-            d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#ff7a00", width=14)
+            d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline=RAND_FARBE, width=14)
         else:
             d.rectangle((0, 0, CARD_W - 1, CARD_H - 1), outline="#dddddd", width=2)
         out = io.BytesIO()
