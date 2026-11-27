@@ -67,11 +67,11 @@ KEYWORDS = [
     "Thermosflasche", "Wasserkocher", "Putzmittel", "Wäscheständer", "Kissen", "Möbel", "couch", "Regal",
     "Decke Kuschel", "Müllsäcke", "Mülleimer", "Aufbewahrungsbox", "waschpulver", "dr.oetker", 
     # Mode
-    "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken",
+    "Winterjacke", "Sneaker", "Jeans", "Pullover", "Socken", "flexfit", 
     "Unterwäsche", "Rucksack", "Handtasche", "Mütze", "Schal", "Sportjacke", "Tanga", "Slip", "Strapsen", 
     "Gürtel", "Sonnenbrille", "Jugendkleidung", "baggyjeans", "Winterklamotten",
     # Beauty & Gesundheit
-    "Parfum", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
+    "Parfum", "Jean Paul Gaultier", "Gesichtscreme", "Shampoo", "Rasierer", "Zahnbürste", "Deo",
     "Kosmetik", "Sport & Freizeit", "Wimperntusche", "eyeliner", "Lippenstift", "Puder", 
     "Yogamatte", "Hanteln", "Fahrradzubehör", "Trinkflasche Sport", "Leggings", "Pilates", 
     "HerrenLeggings", "Wanderschuhe", "gym", "Laufschuhe", "Fahrrad", 
